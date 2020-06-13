@@ -15,6 +15,7 @@ The Flask app was hosted using a free plan from https://www.pythonanywhere.com/
 **Langauges Used and Examples**
 ---
 1) Flask
+  -Handles all of the website logic. The main routes of the app are stored at /application/routes.py
 2) Flask SQLAlchemy
 3) Bootstrap
 4) Jinja2

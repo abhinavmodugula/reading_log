@@ -14,8 +14,7 @@ The Flask app was hosted using a free plan from https://www.pythonanywhere.com/
 
 **Langauges Used and Examples**
 ---
-1) Flask
-  -Handles all of the website logic. The application factory responsible for creating the website is sotored at ../application/__init__.py. 
+1) Flask: Handles all of the website logic. The application factory responsible for creating the website is sotored [here](../application/__init__.py)
   The main blueprint handles the functionality of the log, while the authentication blueprint deals with logging in and singign up users to the website.
 2) Flask SQLAlchemy
 3) Bootstrap

@@ -12,9 +12,7 @@ db = SQLAlchemy()
 
 def create_app():
     app = Flask(__name__)
-    app.secret_key = "dsahiash7897hhdkjh12"
-    app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///test.db'
-    app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+    app.config.from_pyfile('config.py')
     
     db.init_app(app)
     

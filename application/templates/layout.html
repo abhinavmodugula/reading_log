@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>BookLog - Keep Track of Your Reading</title>
+
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+       <a class="navbar-brand" href="{{url_for('main_bp.hello')}}">BookLog</a>
+       <a class="navbar-brand" href="{{url_for('main_bp.hello')}}"">
+            <img src="static/images/logo.png" alt="logo" style="width:40px;">
+       </a>
+       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+       <span class="navbar-toggler-icon"></span>
+       </button>
+       <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav mr-auto">
+             <li class="nav-item active">
+             <a class="nav-link" href="{{url_for('main_bp.all_public_posts')}}">Public Posts <span class="sr-only">(current)</span></a></li>
+             <li class="nav-item"> <a class="nav-link active" href="{{url_for('main_bp.myLog')}}">MyLog</a> </li>
+             
+             <li class="nav-item active"> </li>
+          </ul>
+          <form class="form-inline my-2 my-lg-0">
+         </form>
+          {% if user != "None" %}
+              <a href="#" class="btn btn-success" role="button">Welcome!</a>
+              <a href="{{url_for('auth_bp.signout')}}" class="btn btn-warning" role="button">Sign-out</a>
+          {% else %}
+              <a href="{{url_for('auth_bp.login')}}" class="btn btn-success" role="button">Log-in</a>
+              <a href="{{url_for('auth_bp.signup')}}" class="btn btn-primary" role="button">Sign-up</a>
+          {% endif %}
+          
+       </div>
+    </nav>
+    
+    {% block content %}{% endblock %}
+
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) --> 
+    <!-- <script src="static/js/jquery-3.4.1.min.js"></script> -->
+
+    <!-- Include all compiled plugins (below), or include individual files as needed --> 
+    <!--<script src="static/js/popper.min.js"></script>-->
+    <!--<script src="static/js/bootstrap-4.4.1.js"></script>-->
+    <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+    <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script> -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+  </body>
+</html>
+
+
+

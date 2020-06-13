@@ -1,0 +1,103 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+<div class="jumbotron">
+    <br>
+    <h1 class="display-4">Your Personal Reading Log</h1>
+    <a href="{{url_for('main_bp.create_new')}}" class="btn btn-info" role="button">Add New Book/Article</a>
+    <a href="{{url_for('main_bp.create_public_post')}}" class="btn btn-primary" role="button">Create a Public Post</a>
+</div>
+<ul class="nav nav-tabs">
+  <li class="nav-item"> <a class="nav-link active" href="#">All&nbsp;</a> </li>
+  <li class="nav-item"> <a class="nav-link" href="{{ url_for('main_bp.reading_list')}}">Reading List&nbsp;</a></li>
+  <li class="nav-item"> <a class="nav-link" href="{{ url_for('main_bp.my_public_posts')}}">My Public Posts&nbsp;&nbsp;</a></li>
+      
+  <div class="btn-toolbar" role="toolbar">
+        
+   <div class="btn-group mr-2" role="group"></div>
+  </div>
+</ul>
+<div class="btn-toolbar" role="toolbar"> </div>
+
+<!-- Start of the User's log contents -->
+<div class="list-group"> 
+{% for book in books|reverse %}
+<a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
+  <div class="d-flex w-100 justify-content-between">
+      {% if book.author != "" %}
+          <h5 class="mb-1">{{ book.title }} by {{ book.author }}</h5>
+      {% else %}
+          <h5 class="mb-1">{{ book.title }}</h5>
+      {% endif %}
+      <small class="text-muted">Created {{ book.date_started.strftime("%m/%d/%Y, %I:%M:%S") }}</small>
+  </div>
+    
+  <p class="mb-1">{{ book.description }}</p>
+  
+  <!-- Logs for the book object -->
+  {% for log in book.book_updates|reverse %}
+  <div class="list-group"> 
+    <div class="accordion" id="accordionExample">
+         <div class="card">
+            <div class="card-header" id="headingTwo">
+            <h5 class="mb-0">
+              <small class="text-muted">{{ log.date_created.strftime("%m/%d/%Y, %I:%M:%S") }}</small>
+              <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target={{"#collapseTwo" + loop.index|string}} aria-expanded="false" aria-controls="collapseTwo">
+              {{ log.title }}
+              </button>
+              <small> {{log.pages}}</small>
+            </h5>
+            </div>
+    
+        <div id={{"collapseTwo" + loop.index|string}} class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
+          <div class="card-body">
+            {{ log.text }}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  {% endfor %}
+  <!-- End of logs section -->
+  
+  <div class="end">
+  <button class="btn btn-outline-success" type="button" data-toggle="collapse" data-target={{"#log" + loop.index|string}}>New Log</button>
+  
+  <div id={{"log" + loop.index|string}} class="collapse">
+      <div class="card-body">
+        <form action="{{url_for('main_bp.update')}}" method="POST">
+          <small> Make sure to hit submit before navigating to other tabs </small>
+          <div class="form-group">
+            <label for="title">Title of Post</label>
+            <input type="text" class="form-control" id="title" placeholder="Title of update" name="title" required>
+            <div class="valid-feedback">Valid.</div>
+            <div class="invalid-feedback">Please fill out this field.</div>
+          </div>
+          
+          <div class="form-group">
+            <label for="pages">Pages/Chapters Read</label>
+            <input type="text" class="form-control" id="pages" placeholder="Example input" name="pages">
+          </div>
+  
+          <div class="form-group">
+            <label for="update">Body of Update: </label>
+            <textarea class="form-control" id="update" rows="3" name="update" required></textarea>
+          </div>
+          
+          <div class="collapse" id="hidden_data">
+              <div class="form-group">
+                  <input type="number" id="book_num" value={{book.id}} name="book_num"/>
+              </div>
+          </div> 
+   
+          <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+      </div>
+    </div>
+    </div>
+</a>
+{% endfor %}
+</div>
+{% endblock %}
+
+

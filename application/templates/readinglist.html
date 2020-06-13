@@ -1,0 +1,45 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+<div class="jumbotron">
+    <br>
+    <h1 class="display-4">Your Personal Reading Log</h1>
+    <a href="{{url_for('main_bp.create_new')}}" class="btn btn-info" role="button">Add New Book/Article</a>
+    <a href="{{url_for('main_bp.create_public_post')}}" class="btn btn-primary" role="button">Create a Public Post</a>
+</div>
+<ul class="nav nav-tabs">
+  <li class="nav-item"> <a class="nav-link" href="{{url_for('main_bp.myLog')}}">All&nbsp;</a> </li>
+  <li class="nav-item"> <a class="nav-link active" href="#">Reading List&nbsp;</a></li>
+  <li class="nav-item"> <a class="nav-link" href="{{ url_for('main_bp.my_public_posts')}}">My Public Posts&nbsp;&nbsp;</a></li>
+      
+  <div class="btn-toolbar" role="toolbar">
+        
+   <div class="btn-group mr-2" role="group"></div>
+  </div>
+</ul>
+<div class="btn-toolbar" role="toolbar"> </div>
+
+<ul class="list-group">
+{% for book in books %}
+  <li class="list-group-item d-flex justify-content-between align-items-center">
+    {{ book.title }}
+    {% if book.complete %}
+    <div class="btn-group" role="group" aria-label="Basic example">
+       <a href="#" class="btn btn-success" role="button">Finished!</a>
+       <a href="{{url_for('main_bp.delete', book_id=book.id)}}" class="btn btn-danger" role="button">Delete</a>
+    </div>
+    {% else %}
+    <div class="btn-group" role="group" aria-label="Basic example">
+      <a href="{{ url_for('main_bp.mark_done', book_id=book.id) }}" class="btn btn-success" role="button">Mark as Complete</a>
+      <a href="{{ url_for('main_bp.delete', book_id=book.id) }}" class="btn btn-danger" role="button">Delete</a>
+    </div>
+    {% endif %}
+  </li>
+{% endfor %}
+</ul>
+  
+  
+</div>
+{% endblock %}
+
+

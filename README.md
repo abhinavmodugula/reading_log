@@ -22,5 +22,5 @@ The Flask app was hosted using a free plan from https://www.pythonanywhere.com/
 
 **Demo**
 ---
-GIF of Creating new book and adding a log entry: https://giphy.com/gifs/VGJy7uIBT43XtrCbch/html5.
+![](https://media.giphy.com/media/VGJy7uIBT43XtrCbch/giphy.gif)
 There's much more! So, head to the live website [here](http://amodug1664.pythonanywhere.com/)

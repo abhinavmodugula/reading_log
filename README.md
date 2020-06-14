@@ -5,7 +5,8 @@ This is a fully functional flask app that allows users to keep track of books/ar
 
 
 
-The app was created for the Global Developer Challenge Hackathon (https://global-dev-challenge.devpost.com/?ref_content=default&ref_feature=challenge&ref_medium=portfolio). My submission on DevPost can be found [here] (https://devpost.com/software/reading_log). The YouTube pitch video can be found [here](https://www.youtube.com/watch?v=I24w7Bnt_yc&feature=emb_logo).
+The app was created for the [Global Developer Challenge Hackathon](https://global-dev-challenge.devpost.com/?ref_content=default&ref_feature=challenge&ref_medium=portfolio). My submission on DevPost can be found 
+[here](https://devpost.com/software/reading_log). The YouTube pitch video can be found [here](https://www.youtube.com/watch?v=I24w7Bnt_yc&feature=emb_logo).
 
 **Live Site**
 ---

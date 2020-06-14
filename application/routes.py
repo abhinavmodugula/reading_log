@@ -34,7 +34,7 @@ def all_public_posts():
 @login_required
 def myLog():
     """
-    Shows the user's books and the logs associated with each one'
+    GET: Shows the user's books and the logs associated with each one
 
     """
     user = User.query.filter_by(id=session.get("user_id")).first()
@@ -44,6 +44,10 @@ def myLog():
 @main_bp.route("/readinglist", methods=['GET'])
 @login_required
 def reading_list():
+    """
+    GET: Shows all of the user's books/articles entered and allows
+    for the deletion of unwanted records
+    """
     user = User.query.filter_by(id=session.get("user_id")).first()
     books = user.books
     
@@ -52,6 +56,9 @@ def reading_list():
 @main_bp.route("/publicposts", methods=['GET'])
 @login_required
 def my_public_posts():
+    """
+    GET: A web page showing all the public posts the user has entered
+    """
     user = User.query.filter_by(id=session.get("user_id")).first()
     posts = user.public_posts
     
@@ -60,6 +67,10 @@ def my_public_posts():
 @main_bp.route("/create_update111", methods=['POST'])
 @login_required
 def update():
+    """
+    POST: Adds an update to a selected book/article and updates
+    the myLog webpage
+    """
     title = request.form['title']
     body = request.form['update']
     pages = request.form['pages']
@@ -74,6 +85,9 @@ def update():
 @main_bp.route("/markcomplete/<int:book_id>")
 @login_required
 def mark_done(book_id):
+    """
+    Marks a certain book/article as completed.
+    """
     book = Book.query.filter_by(id=book_id).first()
     if book is not None:
         book.complete=True
@@ -84,6 +98,9 @@ def mark_done(book_id):
 @main_bp.route("/delete/<int:book_id>")
 @login_required
 def delete(book_id):
+    """
+    Deletes a book/article permanently, including all logs
+    """
     book = Book.query.filter_by(id=book_id).first()
     if book is not None:
         db.session.delete(book)
@@ -120,6 +137,10 @@ def create_new():
 @main_bp.route("/myLog/create_public_post", methods=['POST', 'GET'])
 @login_required
 def create_public_post():
+    """
+    GET: Form to create a public post
+    POST: Adds a new public post to the website
+    """
     if request.method == 'POST':
         title = request.form['title']
         descrp = request.form['update']
@@ -139,6 +160,10 @@ def create_public_post():
 
 @main_bp.before_app_request
 def load_logged_in_user():
+    """
+    Util function to see if a user can be loaded into
+    the session before each link
+    """
     user_id = session.get('user_id')
 
     if user_id is None:

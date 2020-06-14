@@ -23,5 +23,5 @@ The Flask app was hosted using a free plan from https://www.pythonanywhere.com/
 
 **Demo**
 ---
-![](https://media.giphy.com/media/VGJy7uIBT43XtrCbch/giphy.gif)
+![](https://media.giphy.com/media/ZBQ50sLkUMJ2KdDaWk/giphy.gif)
 There's much more! So, head to the live website [here](http://amodug1664.pythonanywhere.com/)

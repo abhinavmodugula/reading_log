@@ -9,9 +9,9 @@ Confid file
 
 TESTING = False
 DEBUG = False
-SECRET_KEY = "environ.get('SECRET_KEY')"
+SECRET_KEY = "" #changed for the actual website
 
-SQLALCHEMY_DATABASE_URI = 'sqlite:///test.db'
+SQLALCHEMY_DATABASE_URI = 'sqlite:///test.db' #creates an sqlite database in the local directory
 SQLALCHEMY_ECHO = False
 SQLALCHEMY_TRACK_MODIFICATIONS = False
 

@@ -1,5 +1,5 @@
 **Description**
-<img src=https://github.com/abhinavmodugula/reading_log/tree/master/application/static/images align="left" height="48" width="48" >
+<img src=https://github.com/abhinavmodugula/reading_log/tree/master/application/static/images/logo.png align="left" height="48" width="48" >
 ---
 This is a fully functional flask app that allows users to keep track of books/articles they have read. Users can enter logs whenever they make progress on a book. The website also allows user to post publicly if they have something interesting to share.
 

@@ -6,7 +6,7 @@ Routes for the main functionality of the app
 """
 
 from datetime import datetime
-from .models import db, User, Book, BookUpdate, PublicPost
+from .models import db, User, Book, BookUpdate, PublicPost, Category
 from .auth import login_required
 from flask import render_template, request, flash, redirect, url_for, session, g, Blueprint
 
@@ -42,7 +42,25 @@ def myLog():
     """
     user = User.query.filter_by(id=session.get("user_id")).first()
     books = user.books
-    return render_template("mylog.html", name=session.get("user_id"), user=user, books=books)
+    cats = user.categories
+    return render_template("mylog.html", name=session.get("user_id"), user=user, books=books, cats=cats)
+
+@main_bp.route("/myLog/<int:cat_id>", methods=['GET'])
+@login_required
+def myLogCat(cat_id):
+    """
+    Shows the user's books and the logs associated with each one
+    for only the specificed category
+
+    """
+    user = User.query.filter_by(id=session.get("user_id")).first()
+    books = user.books
+    selected_books = []
+    for book in books:
+        if book.cat_id == cat_id:
+            selected_books.append(book)
+    cats = user.categories
+    return render_template("category.html", name=session.get("user_id"), user=user, books=selected_books, cats=cats, curr_cat=cat_id)
 
 @main_bp.route("/readinglist", methods=['GET'])
 @login_required
@@ -75,6 +93,16 @@ def update():
     db.session.commit()
     return redirect(url_for("main_bp.myLog"))
 
+@main_bp.route("/categorize_book/<int:book_id>/<int:cat_id>")
+@login_required
+def cat_book(book_id, cat_id):
+    book = Book.query.filter_by(id=book_id).first()
+    cat = Category.query.filter_by(id=cat_id).first()
+    book.cat_id = cat_id
+    book.category = cat
+    db.session.commit()
+    return redirect(url_for("main_bp.myLog"))
+
 
 @main_bp.route("/markcomplete/<int:book_id>")
 @login_required
@@ -101,6 +129,25 @@ def update_book_info(book_id):
         return redirect(url_for("main_bp.reading_list"))
     else:
         return redirect(url_for("main_bp.reading_list"))
+
+@main_bp.route("/readingLog/updateLog/<int:log_id>", methods=['GET', 'POST'])
+@login_required
+def update_log(log_id):
+    if request.method == 'POST':
+        title = request.form['title']
+        body = request.form['update']
+        read = request.form['read']
+        date = datetime.now()
+        log = BookUpdate.query.filter_by(id=log_id).first()
+        if log is not None:
+            log.title = title
+            log.date_created = date
+            log.pages = read
+            log.text = body
+            db.session.commit()
+        return redirect(url_for('main_bp.myLog'))
+    else:
+        return redirect(url_for('main_bp.myLog'))
     
 
 @main_bp.route("/delete/<int:book_id>")
@@ -126,6 +173,23 @@ def delete_log(log_id):
     if log is not None:
         db.session.delete(log)
         db.session.commit()
+    return redirect(url_for('main_bp.myLog'))
+
+@main_bp.route("/myLog/create_new_cat", methods=['POST', 'GET'])
+@login_required
+def create_new_cat():
+    if request.method == 'POST':
+        cat = request.form['title']
+        cat_exists = False
+        user = User.query.filter_by(id=session.get("user_id")).first()
+        for name in user.categories:
+            if name.name == cat:
+                flash("Category already exists!")
+                return redirect(url_for('main_bp.myLog'))
+        new_cat = Category(name=cat, user=user, user_id=session.get("user_id"))
+        db.session.add(new_cat)
+        db.session.commit()
+        return redirect(url_for('main_bp.myLog'))
     return redirect(url_for('main_bp.myLog'))
 
 @main_bp.route("/myLog/create_new", methods=['POST', 'GET'])

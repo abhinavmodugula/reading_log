@@ -40,7 +40,7 @@ class Category(db.Model):
     __tablename__ = 'categories'
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(150), index=True, nullable=False, unique=False)
-    user_id = db.Column(db.Integer, ForeignKey('users.id'), nullable=False, index=True)
+    user_id = db.Column(db.Integer, ForeignKey('users.id'), nullable=False, index=False)
     user = relationship("User", backref="categories", foreign_keys=[user_id])
 
 class Book(db.Model):

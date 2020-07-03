@@ -22,9 +22,13 @@
     </div>
 </div>
 <ul class="nav nav-tabs">
-  <li class="nav-item"> <a class="nav-link active" href="#">All&nbsp;</a> </li>
+  <li class="nav-item"> <a class="nav-link" href="{{url_for('main_bp.myLog')}}">All&nbsp;</a> </li>
   {% for cat in cats %}
-      <li class="nav-item"> <a class="nav-link" href="{{url_for('main_bp.myLogCat', cat_id=cat.id)}}">{{cat.name}}</a> </li>
+      {% if cat.id == curr_cat %}
+          <li class="nav-item"> <a class="nav-link active" href="#">{{cat.name}}</a> </li>
+      {% else %}
+          <li class="nav-item"> <a class="nav-link" href="{{url_for('main_bp.myLogCat', cat_id=cat.id)}}">{{cat.name}}</a> </li>
+      {% endif %}
   {% endfor %}
   <li class="nav-item"> <a class="nav-link" href="{{ url_for('main_bp.reading_list')}}">Reading List&nbsp;</a></li>
   <li class="nav-item"> <a class="nav-link" href="{{ url_for('main_bp.my_public_posts')}}">My Public Posts&nbsp;&nbsp;</a></li>
@@ -118,14 +122,6 @@
   <div class="end">
   
   <button class="btn btn-outline-success" type="button" data-toggle="collapse" area-expanded="false" data-target={{"#log" + loop.index|string}}>New Log</button>
-  <button class="btn btn-outline-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-    Categorize
-  </button>
-  <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-    {% for cat in cats %}
-    <a class="dropdown-item" href="{{url_for('main_bp.cat_book', book_id=book.id, cat_id=cat.id)}}">{{cat.name}}</a>
-    {% endfor %}
-  </div>
 
   <div id={{"log" + loop.index|string}} class="collapse multi-collapse">
       <div class="card-body">

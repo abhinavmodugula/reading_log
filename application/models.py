@@ -36,6 +36,13 @@ class User(db.Model):
     def __repr__(self):
         return '<User {}>'.format(self.username)
 
+class Category(db.Model):
+    __tablename__ = 'categories'
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(150), index=True, nullable=False, unique=False)
+    user_id = db.Column(db.Integer, ForeignKey('users.id'), nullable=False, index=True)
+    user = relationship("User", backref="categories", foreign_keys=[user_id])
+
 class Book(db.Model):
     """ Table for the books a user keeps track of privately. """
     __tablename__ = 'books_and_other_readings'
@@ -48,6 +55,8 @@ class Book(db.Model):
     
     user_id = db.Column(db.Integer, ForeignKey('users.id'), nullable=False, index=True)
     user = relationship("User", backref = "books", foreign_keys=[user_id])
+    cat_id = db.Column(db.Integer, ForeignKey('categories.id'), nullable=True, index=True)
+    category = relationship("Category", backref="books", foreign_keys=[cat_id])
 
 class BookUpdate(db.Model):
     """ Table for updates to the book. """
@@ -68,12 +77,13 @@ class PublicPost(db.Model):
     title = db.Column(db.String(100), index=True, unique=False, nullable=False)
     date_created = db.Column(db.DateTime, index=False, unique=False, nullable=False)
     text = db.Column(db.Text, index=False, unique=False, nullable=False)
+    likes = db.Column(db.Integer, index=False, unique=False, nullable=True)
+    dislikes = db.Column(db.Integer, index=False, unique=False, nullable=True)
 
     user_id = db.Column(db.Integer, ForeignKey('users.id'), nullable=False, index=True)
     user = relationship("User", backref = "public_posts", foreign_keys=[user_id])
 
-"""
-TODO: Add public replys in future update
+
 class PublicReply(db.Model):
     __tablename__ = "publicreplys"
     id = db.Column(db.Integer, primary_key=True)
@@ -85,5 +95,4 @@ class PublicReply(db.Model):
     post_id = db.Column(db.Integer, ForeignKey('public_posts.id'), nullable=False, index=True)
     post = relationship("PublicPost", backref="replys", foreign_keys=[post_id])
     
-"""
 

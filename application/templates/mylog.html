@@ -20,19 +20,21 @@
 <div class="btn-toolbar" role="toolbar"> </div>
 
 <!-- Start of the User's log contents -->
-<div class="list-group">
+<div class="card text-left">
 {% for book in books|reverse %}
-<a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
-  <div class="d-flex w-100 justify-content-between">
+
+  <div class="card-header position-sticky justify-content-between">
+      <div class="float-right">
+      <small class="text-muted">Created {{ book.date_started.strftime("%m/%d/%Y") }}</small>
+      </div>
       {% if book.author != "" %}
           <h5 class="mb-1">{{ book.title }} by {{ book.author }}</h5>
       {% else %}
           <h5 class="mb-1">{{ book.title }}</h5>
       {% endif %}
-      <small class="text-muted">Created {{ book.date_started.strftime("%m/%d/%Y") }}</small>
+      <p class="mb-1"> {{ book.description }} </p>
   </div>
-
-  <p class="mb-1"> {{ book.description }} </p>
+  <div class="card-body">
 
   <!-- Logs for the book object -->
   {% for log in book.book_updates|reverse %}
@@ -40,30 +42,66 @@
     <div class="accordion" id="accordionExample">
          <div class="card">
             <div class="card-header" id="headingTwo">
+            <div class="float-right">
+                <div class="btn-group" role="group" aria-label="Basic example">
+                   <button class="btn btn-outline-info" type="button" data-toggle="collapse" area-expanded="false" data-target={{"#logEdit" + log.title|string}}>&#128394;</button>
+                   <a href="#" class="btn btn-outline-danger" role="button">&#10060;</a>
+                </div>
+            </div>
             <h5 class="mb-0">
               <small class="text-muted">{{ log.date_created.strftime("%m/%d/%Y") }}</small>
-              <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target={{"#collapseTwo" + loop.index|string}} aria-expanded="false" aria-controls="collapseTwo">
+              <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target={{"#collapseTwo" + log.title|string}} aria-expanded="false" aria-controls="collapseTwo">
               {{ log.title }}
               </button>
               <small> {{log.pages}}</small>
             </h5>
             </div>
 
-        <div id={{"collapseTwo" + loop.index|string}} class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
+        <div id={{"collapseTwo" + log.title|string}} class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
           <div class="card-body">
             {{ log.text }}
           </div>
         </div>
       </div>
+       <div id={{"logEdit" + log.title|string}} class="collapse multi-collapse">
+      <div class="card-body">
+        <form action="{{url_for('main_bp.update')}}" method="POST">
+          <small> Make sure to hit submit before navigating to other tabs </small>
+          <div class="form-group">
+            <label for="title">Title</label>
+            <input type="text" class="form-control" id="title" value={{log.title|string}} name="title" required>
+            <div class="valid-feedback">Valid.</div>
+            <div class="invalid-feedback">Please fill out this field.</div>
+          </div>
+          
+          <div class="form-group">
+            <label for="title">Chapters/Pages Read</label>
+            <input type="text" class="form-control" id="author" value={{log.pages|string}} name="author" required>
+            <div class="valid-feedback">Valid.</div>
+            <div class="invalid-feedback">Please fill out this field.</div>
+          </div>
+          
+          <div class="form-group">
+            <label for="update">Body: </label>
+            <textarea class="form-control" id="update" rows="3" value={{log.text}} name="update" required></textarea>
+          </div>
+
+
+
+          <button type="submit" class="btn btn-primary">Update Book Info</button>
+        </form>
+      </div>
+    </div>
     </div>
   </div>
   {% endfor %}
   <!-- End of logs section -->
 
   <div class="end">
-  <button class="btn btn-outline-success" type="button" data-toggle="collapse" data-target={{"#log" + loop.index|string}}>New Log</button>
+  
+  <button class="btn btn-outline-success" type="button" data-toggle="collapse" area-expanded="false" data-target={{"#log" + loop.index|string}}>New Log</button>
 
-  <div id={{"log" + loop.index|string}} class="collapse">
+  <div id={{"log" + loop.index|string}} class="collapse multi-collapse">
       <div class="card-body">
         <form action="{{url_for('main_bp.update')}}" method="POST">
           <small> Make sure to hit submit before navigating to other tabs </small>
@@ -94,8 +132,9 @@
         </form>
       </div>
     </div>
+    
     </div>
-</a>
+    </div>
 {% endfor %}
 </div>
 {% endblock %}

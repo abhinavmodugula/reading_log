@@ -83,6 +83,23 @@ def mark_done(book_id):
         db.session.commit()
     return redirect(url_for('main_bp.reading_list'))
 
+@main_bp.route("/readingList/updateinfo/<int:book_id>", methods=['GET', 'POST'])
+@login_required
+def update_book_info(book_id):
+    if request.method == 'POST':
+        title = request.form['title']
+        body = request.form['update']
+        author = request.form['author']
+        book = Book.query.filter_by(id=book_id).first()
+        if book is not None:
+            book.title = title
+            book.author = author
+            book.description = body
+            db.session.commit()
+        return redirect(url_for("main_bp.reading_list"))
+    else:
+        return redirect(url_for("main_bp.reading_list"))
+    
 
 @main_bp.route("/delete/<int:book_id>")
 @login_required

@@ -19,7 +19,7 @@ def create_app():
     with app.app_context():
         from . import routes
         from . import auth
-        from .models import User, Book, BookUpdate, PublicPost
+        from .models import User, Book, Category, BookUpdate, PublicPost, PublicReply
         
         app.register_blueprint(auth.auth_bp)
         app.register_blueprint(routes.main_bp)

@@ -14,7 +14,7 @@
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
        <a class="navbar-brand" href="{{url_for('main_bp.hello')}}">BookLog</a>
        <a class="navbar-brand" href="{{url_for('main_bp.hello')}}"">
-            <img src="static/images/logo.png" alt="logo" style="width:40px;">
+            <img src="https://raw.githubusercontent.com/abhinavmodugula/reading_log/master/application/static/images/logo.png" alt="logo" style="width:40px;">
        </a>
        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
        <span class="navbar-toggler-icon"></span>
@@ -24,7 +24,7 @@
              <li class="nav-item active">
              <a class="nav-link" href="{{url_for('main_bp.all_public_posts')}}">Public Posts <span class="sr-only">(current)</span></a></li>
              <li class="nav-item"> <a class="nav-link active" href="{{url_for('main_bp.myLog')}}">MyLog</a> </li>
-             
+
              <li class="nav-item active"> </li>
           </ul>
           <form class="form-inline my-2 my-lg-0">
@@ -36,16 +36,16 @@
               <a href="{{url_for('auth_bp.login')}}" class="btn btn-success" role="button">Log-in</a>
               <a href="{{url_for('auth_bp.signup')}}" class="btn btn-primary" role="button">Sign-up</a>
           {% endif %}
-          
+
        </div>
     </nav>
-    
+
     {% block content %}{% endblock %}
 
-    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) --> 
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <!-- <script src="static/js/jquery-3.4.1.min.js"></script> -->
 
-    <!-- Include all compiled plugins (below), or include individual files as needed --> 
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
     <!--<script src="static/js/popper.min.js"></script>-->
     <!--<script src="static/js/bootstrap-4.4.1.js"></script>-->
     <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>

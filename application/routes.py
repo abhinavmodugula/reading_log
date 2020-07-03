@@ -70,7 +70,7 @@ def reading_list():
     book_titles = []
     for b in reversed(books):
         book_titles.append(b.title)
-    return render_template("readinglist.html", books = books, titles = book_titles)
+    return render_template("readinglist.html", books = books, titles = book_titles, cats=user.categories)
 
 @main_bp.route("/publicposts", methods=['GET'])
 @login_required
@@ -78,7 +78,7 @@ def my_public_posts():
     user = User.query.filter_by(id=session.get("user_id")).first()
     posts = user.public_posts
 
-    return render_template("mypublicposts.html", posts = posts)
+    return render_template("mypublicposts.html", posts = posts, cats=user.categories)
 
 @main_bp.route("/create_update111", methods=['POST'])
 @login_required

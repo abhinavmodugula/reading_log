@@ -14,12 +14,6 @@
         {{ message }}
       </div>
     {% endfor %}
-    <div class="form-inline">
-        <form action="{{url_for('main_bp.create_new_cat')}}" method="POST">
-          <input type="text" class="form-control" id="title"  name="title" required>
-          <button type="submit" class="btn btn-success">Add Category</button>
-        </form>
-    </div>
 </div>
 <ul class="nav nav-tabs">
   <li class="nav-item"> <a class="nav-link" href="{{url_for('main_bp.myLog')}}">All&nbsp;</a> </li>
@@ -41,7 +35,7 @@
 <div class="btn-toolbar" role="toolbar"> </div>
 
 <!-- Start of the User's log contents -->
-<div class="card text-left">
+<div class="card text-left border-dark mb-3">
 {% for book in books|reverse %}
 
   <div class="card-header position-sticky justify-content-between">

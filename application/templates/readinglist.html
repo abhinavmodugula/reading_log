@@ -9,6 +9,9 @@
 </div>
 <ul class="nav nav-tabs">
   <li class="nav-item"> <a class="nav-link" href="{{url_for('main_bp.myLog')}}">All&nbsp;</a> </li>
+  {% for cat in cats %}
+       <li class="nav-item"> <a class="nav-link" href="{{url_for('main_bp.myLogCat', cat_id=cat.id)}}">{{cat.name}}</a> </li>
+  {% endfor %}
   <li class="nav-item"> <a class="nav-link active" href="#">Reading List&nbsp;</a></li>
   <li class="nav-item"> <a class="nav-link" href="{{ url_for('main_bp.my_public_posts')}}">My Public Posts&nbsp;&nbsp;</a></li>
       

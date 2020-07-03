@@ -45,7 +45,7 @@
             <div class="float-right">
                 <div class="btn-group" role="group" aria-label="Basic example">
                    <button class="btn btn-outline-info" type="button" data-toggle="collapse" area-expanded="false" data-target={{"#logEdit" + log.title|string}}>&#128394;</button>
-                   <a href="#" class="btn btn-outline-danger" role="button">&#10060;</a>
+                   <a href="{{url_for('main_bp.delete_log', log_id=log.id)}}" class="btn btn-outline-danger" role="button">&#10060;</a>
                 </div>
             </div>
             <h5 class="mb-0">
@@ -69,26 +69,26 @@
           <small> Make sure to hit submit before navigating to other tabs </small>
           <div class="form-group">
             <label for="title">Title</label>
-            <input type="text" class="form-control" id="title" value={{log.title|string}} name="title" required>
+            <input type="text" class="form-control" id="title" value="{{log.title|string}}" name="title" required>
             <div class="valid-feedback">Valid.</div>
             <div class="invalid-feedback">Please fill out this field.</div>
           </div>
           
           <div class="form-group">
             <label for="title">Chapters/Pages Read</label>
-            <input type="text" class="form-control" id="author" value={{log.pages|string}} name="author" required>
+            <input type="text" class="form-control" id="author" value="{{log.pages|string}}" name="author" required>
             <div class="valid-feedback">Valid.</div>
             <div class="invalid-feedback">Please fill out this field.</div>
           </div>
           
           <div class="form-group">
             <label for="update">Body: </label>
-            <textarea class="form-control" id="update" rows="3" value={{log.text}} name="update" required></textarea>
+            <textarea class="form-control" id="update" rows="3" value="{{log.text}}" name="update" required>{{log.text}}</textarea>
           </div>
 
 
 
-          <button type="submit" class="btn btn-primary">Update Book Info</button>
+          <button type="submit" class="btn btn-primary">Update Log</button>
         </form>
       </div>
     </div>

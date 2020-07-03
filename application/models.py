@@ -47,7 +47,7 @@ class Book(db.Model):
     """ Table for the books a user keeps track of privately. """
     __tablename__ = 'books_and_other_readings'
     id = db.Column(db.Integer, primary_key=True)
-    title = db.Column(db.String(80), index=True, unique=True, nullable=False)
+    title = db.Column(db.String(80), index=True, unique=False, nullable=False)
     author = db.Column(db.String(80), index=False, unique=False, nullable=True)
     date_started = db.Column(db.DateTime, index=False, unique=False, nullable=False)
     description = db.Column(db.Text, index=False, unique=False, nullable=True)

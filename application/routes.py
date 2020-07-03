@@ -49,8 +49,10 @@ def myLog():
 def reading_list():
     user = User.query.filter_by(id=session.get("user_id")).first()
     books = user.books
-
-    return render_template("readinglist.html", books = books)
+    book_titles = []
+    for b in reversed(books):
+        book_titles.append(b.title)
+    return render_template("readinglist.html", books = books, titles = book_titles)
 
 @main_bp.route("/publicposts", methods=['GET'])
 @login_required
@@ -116,6 +118,15 @@ def delete(book_id):
         db.session.delete(book)
         db.session.commit()
     return redirect(url_for('main_bp.reading_list'))
+
+@main_bp.route("/deletelog/<int:log_id>")
+@login_required
+def delete_log(log_id):
+    log = BookUpdate.query.filter_by(id=log_id).first()
+    if log is not None:
+        db.session.delete(log)
+        db.session.commit()
+    return redirect(url_for('main_bp.myLog'))
 
 @main_bp.route("/myLog/create_new", methods=['POST', 'GET'])
 @login_required

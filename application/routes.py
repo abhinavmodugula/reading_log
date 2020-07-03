@@ -175,6 +175,20 @@ def delete_log(log_id):
         db.session.commit()
     return redirect(url_for('main_bp.myLog'))
 
+@main_bp.route("/deletecat/<int:cat_id>")
+@login_required
+def delete_cat(cat_id):
+    user = User.query.filter_by(id=session.get("user_id")).first()
+    books = user.books
+    for book in books:
+        if book.cat_id == cat_id:
+            book.cat_id = None
+            book.category = None
+    cat = Category.query.filter_by(id=cat_id).first()
+    db.session.delete(cat)
+    db.session.commit()
+    return redirect(url_for('main_bp.myLog'))
+
 @main_bp.route("/myLog/create_new_cat", methods=['POST', 'GET'])
 @login_required
 def create_new_cat():

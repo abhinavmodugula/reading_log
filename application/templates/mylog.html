@@ -19,6 +19,14 @@
           <input type="text" class="form-control" id="title"  name="title" required>
           <button type="submit" class="btn btn-success">Add Category</button>
         </form>
+        <button class="btn btn-outline-danger dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Delete Category
+          </button>
+          <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+            {% for cat in cats %}
+            <a class="dropdown-item" href="{{url_for('main_bp.delete_cat', cat_id=cat.id)}}">{{cat.name}}</a>
+            {% endfor %}
+          </div>
     </div>
 </div>
 <ul class="nav nav-tabs">

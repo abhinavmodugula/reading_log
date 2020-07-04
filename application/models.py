@@ -77,8 +77,6 @@ class PublicPost(db.Model):
     title = db.Column(db.String(100), index=True, unique=False, nullable=False)
     date_created = db.Column(db.DateTime, index=False, unique=False, nullable=False)
     text = db.Column(db.Text, index=False, unique=False, nullable=False)
-    likes = db.Column(db.Integer, index=False, unique=False, nullable=True)
-    dislikes = db.Column(db.Integer, index=False, unique=False, nullable=True)
 
     user_id = db.Column(db.Integer, ForeignKey('users.id'), nullable=False, index=True)
     user = relationship("User", backref = "public_posts", foreign_keys=[user_id])

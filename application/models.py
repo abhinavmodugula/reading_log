@@ -52,6 +52,7 @@ class Book(db.Model):
     date_started = db.Column(db.DateTime, index=False, unique=False, nullable=False)
     description = db.Column(db.Text, index=False, unique=False, nullable=True)
     complete = db.Column(db.Boolean, index=False, unique=False, nullable=True)
+    picture_link = db.Column(db.String(64), index=False, unique=False, nullable=True)
     
     user_id = db.Column(db.Integer, ForeignKey('users.id'), nullable=False, index=True)
     user = relationship("User", backref = "books", foreign_keys=[user_id])

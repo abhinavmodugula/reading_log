@@ -127,8 +127,7 @@ def update_book_info(book_id):
             book.description = body
             db.session.commit()
         return redirect(url_for("main_bp.reading_list"))
-    else:
-        return redirect(url_for("main_bp.reading_list"))
+    return redirect(url_for("main_bp.reading_list"))
 
 @main_bp.route("/readingLog/updateLog/<int:log_id>", methods=['GET', 'POST'])
 @login_required

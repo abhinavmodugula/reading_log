@@ -66,14 +66,14 @@
             </div>
             <h5 class="mb-0">
               <small class="text-muted">{{ log.date_created.strftime("%m/%d/%Y") }}</small>
-              <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target={{"#collapseTwo" + log.title|string}} aria-expanded="false" aria-controls="collapseTwo">
+              <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="{{"#collapseTwo" + log.id|string}}" aria-expanded="false" aria-controls="collapseTwo">
               {{ log.title }}
               </button>
               <small> {{log.pages}}</small>
             </h5>
             </div>
 
-        <div id={{"collapseTwo" + log.title|string}} class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
+        <div id="{{"collapseTwo" + log.id|string}}" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
           <div class="card-body">
             {{ log.text }}
           </div>

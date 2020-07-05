@@ -3,11 +3,6 @@
 ---
 This is a fully functional flask app that allows users to keep track of books/articles they have read. Users can enter logs whenever they make progress on a book. The website also allows user to post publicly if they have something interesting to share.
 
-
-
-The app was created for the [Global Developer Challenge Hackathon](https://global-dev-challenge.devpost.com/?ref_content=default&ref_feature=challenge&ref_medium=portfolio). My submission on DevPost can be found 
-[here](https://devpost.com/software/reading_log). The YouTube pitch video can be found [here](https://www.youtube.com/watch?v=I24w7Bnt_yc&feature=emb_logo).
-
 **Live Site**
 ---
 http://amodug1664.pythonanywhere.com/
@@ -24,5 +19,5 @@ The Flask app was hosted using a free plan from https://www.pythonanywhere.com/
 
 **Demo**
 ---
-![](https://media.giphy.com/media/ZBQ50sLkUMJ2KdDaWk/giphy.gif)
+![](https://media.giphy.com/media/f3dlHrHuB92m9BvJRJ/giphy.gif)
 There's much more! So, head to the live website [here](http://amodug1664.pythonanywhere.com/)
